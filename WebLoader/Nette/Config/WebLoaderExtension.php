@@ -34,6 +34,7 @@ class WebLoaderExtension extends \Nette\Config\CompilerExtension
 		$container = $this->getContainerBuilder();
 		$config = $this->getConfig($this->defaults);
 
+		$this->checkTempDir($config['css']['tempDir']);
 		$container->addDefinition($this->prefix('css'))
 			->setClass('WebLoader\Nette\CssLoader')
 			->setFactory('WebLoader\Nette\CssLoader::createLoader', array(
@@ -44,6 +45,7 @@ class WebLoaderExtension extends \Nette\Config\CompilerExtension
 			)
 		);
 
+		$this->checkTempDir($config['javascript']['tempDir']);
 		$container->addDefinition($this->prefix('javascript'))
 			->setClass('WebLoader\Nette\JavaScriptLoader')
 			->setFactory('WebLoader\Nette\JavaScriptLoader::createLoader', array(
@@ -53,6 +55,13 @@ class WebLoaderExtension extends \Nette\Config\CompilerExtension
 				$config['javascript']['files'],
 			)
 		);
+	}
+
+	private function checkTempDir($dir)
+	{
+		if ( ! file_exists($dir) && ! @mkdir($dir, 0777) || ! is_writable($dir)) { // @ - is escalated to exception
+			throw new \Nette\InvalidStateException("Unable to write to directory '$dir'. Make this directory writable.");
+		}
 	}
 
 }
