@@ -17,5 +17,12 @@
 	},
 	"require": {
 		"nette/nette": "2.0.*"
+	},
+	"extra": {
+		"nette-addon": {
+			"config-extensions": {
+				"webLoader": "WebLoader\\Nette\\Config\\WebLoaderExtension"
+			}
+		}
 	}
 }
