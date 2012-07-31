@@ -1,5 +1,6 @@
 {
 	"name": "JanMarek/WebLoader",
+	"type": "nette-addon",
 	"description": "Tool for loading or deploying CSS and JS files into web pages",
 	"keywords": ["webloader", "css", "javascript", "assets", "nette"],
 	"homepage": "http://addons.nette.org/cs/webloader",
@@ -16,7 +17,8 @@
 		}
 	},
 	"require": {
-		"nette/nette": "2.0.*"
+		"nette/nette": "2.0.*",
+		"nette/addon-installer": "@dev"
 	},
 	"extra": {
 		"nette-addon": {
